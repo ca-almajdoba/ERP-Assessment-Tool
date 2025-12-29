@@ -5,205 +5,279 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ERP Assessment Tool</title>
 
+  <!-- One font for both languages -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- One font for both languages -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================
+       PREMIUM DARK THEME (Sharp)
+       Inspired by your ExpertCloud sample
+       ========================= */
     :root{
       --blue:#0070C0;
+      --blue2:#0b86e6;
       --green:#28A745;
-      --ink:#12202f;
-      --muted:#6b7a8a;
-      --line:rgba(17,32,47,.10);
-      --shadow: 0 16px 42px rgba(18,32,47,.10);
-      --radius: 18px;
-      --focus: rgba(0,112,192,.18);
-      --bg:
-        radial-gradient(1200px 600px at 15% 5%, rgba(0,112,192,.10), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(40,167,69,.10), transparent 60%),
-        linear-gradient(180deg, #f6fbff, #f8fff9);
+
+      --bg:#000000;
+      --bg2:#050505;
+      --panel:#0a0a0a;
+      --panel2:#0d0d0d;
+
+      --text:#ffffff;
+      --muted:#8c8c8c;
+
+      --line:#1a1a1a;
+      --line2:#222;
+
+      --shadow: 0 22px 60px rgba(0,0,0,.65);
+      --focus: rgba(0,112,192,.25);
+
+      --radius:0px; /* SHARP EDGES */
     }
 
-    *{box-sizing:border-box}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
 
     body{
-      margin:0;
-      font-family:'Noto Kufi Arabic',system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background: var(--bg);
-      color: var(--ink);
+      font-family:'Noto Kufi Arabic', system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(circle at center, #001a2c 0%, #000 72%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x:hidden;
     }
     body.rtl{ direction: rtl; text-align: right; }
     body.ltr{ direction: ltr; text-align: left; }
 
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(12px);
+    /* =========================
+       NAVBAR (like sample)
+       ========================= */
+    .navbar{
+      height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 8%;
+      position: sticky;
+      top:0;
+      z-index:1000;
+
+      background: rgba(0,0,0,.9);
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--line);
     }
-    .wrap{
-      max-width: 1150px;
-      margin: 0 auto;
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width: 240px;
+    }
+    .mark{
+      width:42px;height:42px;
+      background: linear-gradient(135deg, rgba(0,112,192,.35), rgba(40,167,69,.22));
+      border: 1px solid rgba(0,112,192,.30);
+      position:relative;
+      overflow:hidden;
+    }
+    .mark::before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: translateX(-140%);
+      animation: sweep 2.8s linear infinite;
+    }
+    @keyframes sweep{ 0%{transform:translateX(-140%)} 100%{transform:translateX(140%)} }
+
+    .logoText h1{
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .5px;
+      color:#fff;
+      margin:0;
+    }
+    .logoText h1 span{ color: var(--blue2); }
+    .logoText small{
+      display:block;
+      margin-top:4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .navActions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .langToggle{
+      display:flex;
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+    }
+    .langChip{
+      border:0;
+      background: transparent;
+      color: #aaaaaa;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1px;
+      padding: 12px 14px;
+      cursor:pointer;
+      transition:.25s;
+      font-family:'Noto Kufi Arabic',sans-serif;
+    }
+    .langChip:hover{ color:#fff; }
+    .langChip.active{
+      background: rgba(0,115,187,.18);
+      color:#fff;
+      box-shadow: inset 0 -2px 0 var(--blue2);
+    }
+
+    .btn{
+      border-radius: var(--radius);
       padding: 14px 18px;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor:pointer;
+      transition: .25s;
+      user-select:none;
+
+      background: transparent;
+      border: 1px solid #333;
+      color:#fff;
+      font-family:'Noto Kufi Arabic',sans-serif;
+      white-space:nowrap;
+    }
+    body.rtl .btn{ letter-spacing: 0; text-transform: none; }
+    .btn:hover{
+      border-color: var(--blue2);
+      color: var(--blue2);
+      transform: translateY(-1px);
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn-primary{
+      background: var(--blue2);
+      border-color: var(--blue2);
+      color:#fff;
+    }
+    .btn-primary:hover{
+      background: transparent;
+      border-color:#fff;
+      color:#fff;
+    }
+    .btn-green{
+      background: var(--green);
+      border-color: var(--green);
+      color:#fff;
+    }
+    .btn-green:hover{
+      background: transparent;
+      border-color:#fff;
+      color:#fff;
+    }
+
+    /* =========================
+       HERO (like sample)
+       ========================= */
+    .hero{
+      padding: 42px 8% 26px;
+      border-bottom: 1px solid var(--line);
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 980px){
+      .navbar{ padding: 0 5%; }
+      .hero{ padding: 34px 5% 20px; }
+      .heroGrid{ grid-template-columns: 1fr; }
+      .logo{ min-width: auto; }
+    }
+
+    .heroTitle{
+      font-size: clamp(26px, 3vw, 48px);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .heroTitle span{ color: var(--blue2); }
+    body.rtl .heroTitle{ letter-spacing: 0; }
+    body.ltr .heroTitle{
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .heroHint{
+      color: #888;
+      font-size: 14px;
+      max-width: 900px;
+      margin-bottom: 18px;
+    }
+    .devLink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#fff;
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      background: #0a0a0a;
+      transition:.25s;
+      margin-bottom: 16px;
+    }
+    .devLink:hover{
+      border-color: var(--blue2);
+      transform: translateY(-1px);
+    }
+    .dot{
+      width:10px;height:10px;
+      background: var(--blue2);
+    }
+    .devLink .pfx{ color:#aaaaaa; font-weight: 900; font-size: 12px; }
+    .devLink .nm{ color:#fff; font-weight: 900; font-size: 12px; }
+    .devLink .nm b{ color: var(--blue2); }
+
+    /* =========================
+       PANELS (cards) - SHARP
+       ========================= */
+    .panel{
+      background: rgba(10,10,10,.95);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panelPad{ padding: 18px; }
+
+    .progressBox{
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      background: #0a0a0a;
+      padding: 12px 14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
     }
-    .brand{ display:flex; align-items:center; gap:10px; }
-    .mark{
-      width:38px;height:38px;border-radius:14px;
-      background: linear-gradient(135deg, rgba(0,112,192,.18), rgba(40,167,69,.18));
-      border:1px solid rgba(0,112,192,.14);
-      position:relative; overflow:hidden;
-    }
-    .mark::before{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.75), transparent);
-      transform: translateX(-120%);
-      animation: sweep 2.6s linear infinite;
-    }
-    @keyframes sweep{ 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
-
-    .brand h1{ margin:0; font-size: 14px; font-weight: 900; color: var(--blue); }
-    .brand small{ display:block; margin-top:2px; color: var(--muted); font-size: 12px; font-weight: 700; }
-
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-
-    .btn{
-      border: 1px solid transparent;
-      border-radius: 14px;
-      padding: 10px 12px;
-      font-weight: 900;
-      font-size: 12px;
-      cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
-      font-family:'Noto Kufi Arabic',sans-serif;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 12px 26px rgba(18,32,47,.10);
-      color: var(--ink);
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); box-shadow: 0 16px 36px rgba(18,32,47,.14); }
-    .btn:active{ transform: translateY(1px); }
-    .btn-primary{
-      background: linear-gradient(135deg, var(--blue), #0b86e6);
-      color:#fff;
-      box-shadow: 0 14px 30px rgba(0,112,192,.22);
-    }
-    .btn-green{
-      background: linear-gradient(135deg, var(--green), #34c759);
-      color:#fff;
-      box-shadow: 0 14px 30px rgba(40,167,69,.20);
-    }
-
-    /* Language toggle */
-    .langToggle{
-      display:flex; gap:8px; padding:6px;
-      border:1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,.75);
-      box-shadow: 0 10px 22px rgba(18,32,47,.08);
-    }
-    .langChip{
-      border:1px solid transparent;
-      border-radius: 12px;
-      padding:8px 10px;
-      font-weight: 1000;
-      font-size: 12px;
-      cursor:pointer;
-      background: rgba(255,255,255,.9);
-      color: var(--ink);
-      transition: transform .18s ease, box-shadow .18s ease;
-      user-select:none;
-      font-family:'Noto Kufi Arabic',sans-serif;
-    }
-    .langChip.active{
-      background: linear-gradient(135deg, rgba(0,112,192,.12), rgba(40,167,69,.12));
-      border-color: rgba(0,112,192,.20);
-      box-shadow: 0 0 0 4px rgba(0,112,192,.12);
-    }
-
-    .container{
-      max-width:1150px;
-      margin: 0 auto;
-      padding: 20px 18px 60px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    @media(max-width:980px){ .grid{ grid-template-columns:1fr; } }
-
-    .card{
-      background: rgba(255,255,255,.88);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .pad{ padding: 18px; }
-
-    .hero::before{
-      content:"";
-      position:absolute; top:0; inset-inline-start:0;
-      width:100%; height:5px;
-      background: linear-gradient(90deg, var(--blue), var(--green), var(--blue));
-      background-size: 200% 100%;
-      animation: sheen 3.6s linear infinite;
-    }
-    @keyframes sheen{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-
-    .title{ margin: 10px 0 6px; font-size: 20px; font-weight: 1000; line-height: 1.9; }
-    .devLink{
-      display:inline-flex; align-items:center; gap:10px;
-      margin: 4px 0 12px;
-      padding: 9px 12px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0,112,192,.08), rgba(40,167,69,.08));
-      border: 1px solid rgba(0,112,192,.12);
-      text-decoration:none;
-      color: var(--ink);
-      font-weight: 900;
-      font-size: 12px;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .devLink:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(18,32,47,.12); }
-    .dot{ width:10px;height:10px;border-radius:999px; background: linear-gradient(135deg, var(--blue), var(--green)); }
-    .devLink span{ color: var(--blue); font-weight: 1000; }
-
-    .sub{ margin:0; color: var(--muted); font-size: 13px; font-weight: 700; line-height: 2; }
-
-    /* Progress */
-    .progressBox{
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
-      border-radius: 16px;
-      padding: 10px 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
     .progressText{
       font-size: 12px;
-      font-weight: 1000;
-      color: var(--ink);
+      font-weight: 900;
+      color: #ddd;
     }
     .miniBarWrap{
-      flex: 1 1 240px;
-      background: rgba(0,112,192,.08);
-      border:1px solid var(--line);
-      border-radius: 999px;
+      flex: 1 1 260px;
+      background: #050505;
+      border:1px solid var(--line2);
       padding: 4px;
       overflow:hidden;
       min-width: 220px;
@@ -211,31 +285,29 @@
     .miniBar{
       height: 10px;
       width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue), var(--green));
+      background: linear-gradient(90deg, var(--blue2), var(--green));
       transition: width .25s ease;
     }
 
     .meta{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:10px;
-      margin-top: 14px;
+      gap:12px;
+      margin-top: 16px;
     }
-    @media(max-width:520px){ .meta{ grid-template-columns:1fr; } }
+    @media(max-width: 560px){ .meta{ grid-template-columns: 1fr; } }
 
     .field{
-      background: rgba(255,255,255,.92);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 10px 12px;
+      background: #0a0a0a;
+      padding: 12px 12px;
     }
-    .field:focus-within{ box-shadow: 0 0 0 4px var(--focus); }
+    .field:focus-within{ box-shadow: 0 0 0 4px var(--focus); border-color: rgba(0,112,192,.55); }
     .field label{
       display:block;
       font-size: 11px;
-      font-weight: 1000;
-      color: var(--muted);
+      font-weight: 900;
+      color:#888;
       margin-bottom: 6px;
     }
     .field input{
@@ -245,70 +317,63 @@
       background: transparent;
       font-weight: 900;
       font-size: 13px;
+      color:#fff;
       font-family:'Noto Kufi Arabic',sans-serif;
-      color: var(--ink);
     }
     body.rtl .field input{ text-align:right; }
     body.ltr .field input{ text-align:left; }
 
-    /* Score */
-    .score::before{
-      content:"";
-      position:absolute; top:0; inset-inline-start:0;
-      width:100%; height:5px;
-      background: linear-gradient(90deg, var(--green), var(--blue));
-    }
+    /* Score panel */
     .scoreTop{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
     }
     .badge{
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.92);
+      padding: 10px 12px;
       border: 1px solid var(--line);
-      color: var(--blue);
-      font-weight: 1000;
-      font-size: 12px;
+      background: #0a0a0a;
+      color: #aaa;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       white-space:nowrap;
     }
+    body.rtl .badge{ letter-spacing:0; text-transform:none; }
 
     .big{
       display:flex;
       align-items:flex-end;
-      gap:10px;
-      margin-top: 10px;
+      gap:12px;
+      margin-top: 14px;
     }
     body.rtl .big{ flex-direction: row-reverse; }
     body.ltr .big{ flex-direction: row; }
 
-    .pct{ font-size: 40px; font-weight: 1100; line-height:1; }
-    .grade{ font-size: 13px; font-weight: 1100; padding-bottom: 6px; color: var(--muted); }
+    .pct{ font-size: 44px; font-weight: 1000; line-height:1; }
+    .grade{ font-size: 13px; font-weight: 900; padding-bottom: 8px; color: #bbb; }
 
     .barWrap{
-      margin-top: 12px;
-      background: rgba(0,112,192,.08);
-      border:1px solid var(--line);
-      border-radius: 999px;
+      margin-top: 14px;
+      background: #050505;
+      border:1px solid var(--line2);
       padding: 4px;
       overflow:hidden;
     }
     .bar{
       height: 12px;
       width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue), var(--green));
+      background: linear-gradient(90deg, var(--blue2), var(--green));
       transition: width .35s ease;
     }
 
     .box{
       margin-top: 14px;
-      border-radius: 16px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.92);
+      background: #0a0a0a;
       padding: 12px;
       display:none;
       gap:10px;
@@ -320,32 +385,53 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
     }
-
     .boxTitle{
       font-size: 12px;
-      font-weight: 1100;
-      color: var(--ink);
+      font-weight: 900;
+      color:#fff;
       line-height: 1.9;
     }
     .boxTitle small{
       display:block;
-      margin-top: 3px;
-      color: var(--muted);
+      margin-top: 4px;
+      color:#888;
       font-weight: 800;
     }
 
-    .btnGroup{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+    textarea{
+      width:100%;
+      min-height:120px;
+      border:1px solid var(--line);
+      background:#050505;
+      color:#fff;
+      padding:12px;
+      font-family:'Noto Kufi Arabic',sans-serif;
+      font-weight:800;
+      resize:vertical;
+      outline:none;
     }
+    textarea:focus{ box-shadow: 0 0 0 4px var(--focus); border-color: rgba(0,112,192,.55); }
 
     /* Sections */
-    .section{ margin-top: 16px; transition: transform .18s ease, box-shadow .18s ease; }
-    .section:hover{ transform: translateY(-2px); box-shadow: 0 16px 44px rgba(18,32,47,.14); }
+    .container{
+      padding: 22px 8% 50px;
+    }
+    @media(max-width:980px){ .container{ padding: 18px 5% 44px; } }
+
+    .section{
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      background: rgba(10,10,10,.95);
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .section:hover{
+      transform: translateY(-2px);
+      border-color: rgba(0,115,187,.45);
+    }
 
     .sectionHead{
       padding: 16px 16px 12px;
@@ -354,29 +440,36 @@
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
+      border-bottom: 1px solid var(--line);
       position:relative;
     }
     .sectionHead::before{
       content:"";
       position:absolute; top:0; inset-inline-start:0;
-      height:4px; width:100%;
-      background: var(--blue);
+      height:3px; width:100%;
+      background: var(--blue2);
     }
     .section[data-accent="green"] .sectionHead::before{ background: var(--green); }
 
-    .sectionTitle{ margin:0; font-size: 14px; font-weight: 1100; }
-    .sectionScore{ min-width: 160px; }
+    .sectionTitle{
+      margin:0;
+      font-size: 13px;
+      font-weight: 1000;
+      color:#fff;
+    }
+
+    .sectionScore{ min-width: 170px; }
     body.rtl .sectionScore{ text-align:left; }
     body.ltr .sectionScore{ text-align:right; }
 
-    .sectionPct{ font-weight: 1100; font-size: 18px; line-height:1.1; }
-    .sectionLabel{ font-size: 11px; font-weight: 1000; color: var(--muted); margin-top: 4px; }
+    .sectionPct{ font-weight: 1000; font-size: 18px; line-height:1.1; }
+    .sectionLabel{ font-size: 11px; font-weight: 900; color: #888; margin-top: 4px; }
 
-    .qList{ padding: 0 16px 16px; display:grid; gap:10px; }
+    .qList{ padding: 14px 16px 16px; display:grid; gap:10px; }
+
     .q{
-      background: rgba(255,255,255,.92);
       border:1px solid var(--line);
-      border-radius: 16px;
+      background: #0a0a0a;
       padding: 12px;
       position:relative;
       overflow:hidden;
@@ -384,81 +477,83 @@
     .q::before{
       content:"";
       position:absolute; inset-inline-start:0; top:0;
-      width:6px; height:100%;
-      background: rgba(0,112,192,.14);
+      width:4px; height:100%;
+      background: rgba(0,115,187,.7);
     }
-    .section[data-accent="green"] .q::before{ background: rgba(40,167,69,.14); }
+    .section[data-accent="green"] .q::before{ background: rgba(40,167,69,.8); }
 
     .qRow{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:10px;
+      gap:12px;
       flex-wrap:wrap;
     }
     .qText{
-      font-weight: 900;
+      font-weight: 800;
       font-size: 13px;
       line-height: 2;
       flex: 1 1 520px;
       min-width: 220px;
+      color:#f3f3f3;
     }
-
     .w{
-      font-size: 12px;
-      font-weight: 1100;
-      color: var(--green);
+      font-size: 11px;
+      font-weight: 1000;
+      color: #aaa;
       white-space:nowrap;
     }
 
     select{
       border:1px solid var(--line);
-      background: rgba(255,255,255,.97);
-      color: var(--ink);
-      border-radius: 14px;
-      padding: 9px 10px;
+      background: #050505;
+      color:#fff;
+      padding: 10px 12px;
       font-weight: 1000;
       font-size: 12px;
       outline:none;
       cursor:pointer;
-      min-width: 120px;
+      min-width: 130px;
       font-family:'Noto Kufi Arabic',sans-serif;
       text-align: center;
-      transition: box-shadow .18s ease;
+      transition: .2s;
     }
-    select:focus{ box-shadow: 0 0 0 4px var(--focus); }
+    select:focus{ box-shadow: 0 0 0 4px var(--focus); border-color: rgba(0,112,192,.55); }
 
+    /* Footer */
     .footer{
-      max-width:1150px;
-      margin: 0 auto;
-      padding: 0 18px 30px;
-      color: var(--muted);
-      font-weight: 900;
-      font-size: 12px;
+      padding: 26px 8%;
+      border-top: 1px solid var(--line);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
       flex-wrap:wrap;
+      color:#666;
+      font-size: 12px;
+      letter-spacing: 1px;
     }
+    body.rtl .footer{ letter-spacing:0; }
+    #footerDev{ color: var(--blue2); font-weight: 1000; }
 
+    /* Toast */
     .toast{
       position: fixed;
       inset-inline-start: 14px;
       bottom: 14px;
       padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(18,32,47,.92);
+      background: rgba(10,10,10,.95);
+      border: 1px solid var(--line);
       color:#fff;
-      font-weight: 1000;
+      font-weight: 900;
       font-size: 12px;
-      box-shadow: 0 16px 42px rgba(0,0,0,.22);
       opacity:0;
       transform: translateY(10px);
       transition: opacity .22s ease, transform .22s ease;
       z-index: 999;
       pointer-events:none;
       max-width: 92vw;
+      box-shadow: var(--shadow);
     }
     .toast.show{ opacity:1; transform: translateY(0); }
 
@@ -468,43 +563,43 @@
 </head>
 
 <body class="rtl">
-  <div class="topbar">
-    <div class="wrap">
-      <div class="brand">
-        <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1 id="appName">أداة التقييم الفني لنظام ERP</h1>
-          <small id="appTagline">أداة مجانية مبسطة لقياس الوضع العام</small>
-        </div>
-      </div>
-
-      <div class="actions">
-        <div class="langToggle" aria-label="Language toggle">
-          <button class="langChip active" id="langAR" type="button">AR</button>
-          <button class="langChip" id="langEN" type="button">EN</button>
-        </div>
-
-        <button class="btn" id="btnReset" type="button">إعادة ضبط</button>
-        <button class="btn" id="btnSave" type="button">حفظ</button>
-        <button class="btn" id="btnLoad" type="button">تحميل</button>
-        <button class="btn btn-primary" id="btnCalculate" type="button">احتساب النتائج</button>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="mark" aria-hidden="true"></div>
+      <div class="logoText">
+        <h1 id="appName">أداة التقييم الفني <span>لنظام ERP</span></h1>
+        <small id="appTagline">أداة مجانية مبسطة لقياس الوضع العام</small>
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="grid">
-      <div class="card hero">
-        <div class="pad">
-          <div class="title" id="heroTitle">التقييم الفني لنظام تخطيط موارد المؤسسات الخاص بك</div>
+    <div class="navActions">
+      <div class="langToggle" aria-label="Language toggle">
+        <button class="langChip active" id="langAR" type="button">AR</button>
+        <button class="langChip" id="langEN" type="button">EN</button>
+      </div>
+
+      <button class="btn" id="btnReset" type="button">إعادة ضبط</button>
+      <button class="btn" id="btnSave" type="button">حفظ</button>
+      <button class="btn" id="btnLoad" type="button">تحميل</button>
+      <button class="btn btn-primary" id="btnCalculate" type="button">احتساب النتائج</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="heroGrid">
+      <div class="panel">
+        <div class="panelPad">
+          <div class="heroTitle" id="heroTitle">التقييم الفني لنظام تخطيط موارد المؤسسات الخاص بك</div>
 
           <a class="devLink" href="https://www.majdoba.me" target="_blank" rel="noopener noreferrer" id="devLink">
             <span class="dot" aria-hidden="true"></span>
-            <span id="devTextPrefix">مطور بواسطة</span>
-            <span id="devTextName">أحمد المجدوبة للاستشارات التقنية</span>
+            <span class="pfx" id="devTextPrefix">مطور بواسطة</span>
+            <span class="nm" id="devTextName"><b>أحمد المجدوبة</b> للاستشارات التقنية</span>
           </a>
 
-          <p class="sub" id="heroHint">
+          <p class="heroHint" id="heroHint">
             اختر رقم لكل سؤال (من 1 حتى وزن السؤال)، ثم اضغط <b>احتساب النتائج</b>.
           </p>
 
@@ -544,10 +639,11 @@
         </div>
       </div>
 
-      <div class="card score">
-        <div class="pad">
+      <!-- SCORE PANEL -->
+      <div class="panel">
+        <div class="panelPad">
           <div class="scoreTop">
-            <div style="font-weight:1100;" id="overallTitle">النتيجة الإجمالية</div>
+            <div style="font-weight:1000;" id="overallTitle">النتيجة الإجمالية</div>
             <div class="badge" id="overallBadge">لم يتم الاحتساب</div>
           </div>
 
@@ -570,35 +666,38 @@
                 ملخص سريع جاهز للمشاركة
                 <small id="shareSubtitle">انسخ الملخص أو شاركه مباشرة</small>
               </div>
-              <div class="btnGroup">
+              <div style="display:flex; gap:12px; flex-wrap:wrap;">
                 <button class="btn" id="btnCopy" type="button">نسخ الملخص</button>
                 <button class="btn" id="btnShare" type="button">مشاركة</button>
                 <button class="btn btn-green" id="btnSend" type="button">إرسال التقرير</button>
               </div>
             </div>
 
-            <textarea id="summaryText" readonly
-              style="width:100%; min-height:120px; border:1px solid var(--line); border-radius:14px; padding:10px; font-family:'Noto Kufi Arabic',sans-serif; font-weight:800; color:var(--ink); background:rgba(255,255,255,.95); resize:vertical;"></textarea>
+            <textarea id="summaryText" readonly></textarea>
 
-            <div class="sub" style="margin-top:-4px;" id="sendNote">
+            <div class="heroHint" style="margin-top:10px;" id="sendNote">
               ملاحظة: زر “إرسال التقرير” يفتح رسالة جاهزة إلى <b>info@majdoba.me</b> لتقوم بإرسالها.
             </div>
           </div>
 
-          <p class="sub" style="margin-top:12px;" id="formulaNote">
+          <div class="heroHint" style="margin-top:14px;" id="formulaNote">
             (النتيجة = مجموع الدرجات ÷ مجموع الأوزان) × 100
-          </p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
+  <!-- SECTIONS -->
+  <div class="container">
     <div id="sectionsMount"></div>
   </div>
 
-  <div class="footer">
+  <!-- FOOTER -->
+  <footer class="footer">
     <div><span id="lastUpdateLabel">آخر تحديث:</span> <span id="clock">—</span></div>
-    <div style="color:var(--blue); font-weight:1100;" id="footerDev">DEVELOPED BY: AHMAD MAJDOBA</div>
-  </div>
+    <div id="footerDev">DEVELOPED BY: AHMAD MAJDOBA</div>
+  </footer>
 
   <div class="toast" id="toast"></div>
 
@@ -897,7 +996,7 @@ function buildOptions(weight){
 function gradeFromPct(p){
   const t = I18N[LANG].grades;
   if (p >= 85) return { label: t.excellent, color:"var(--green)" };
-  if (p >= 70) return { label: t.veryGood, color:"var(--blue)" };
+  if (p >= 70) return { label: t.veryGood, color:"var(--blue2)" };
   if (p >= 55) return { label: t.ok, color:"#d48806" };
   return { label: t.needs, color:"#d64545" };
 }
@@ -916,7 +1015,7 @@ function renderSections(){
   mount.innerHTML = "";
   SECTIONS.forEach(sec => {
     const section = document.createElement("div");
-    section.className = "card section";
+    section.className = "section";
     section.dataset.accent = sec.accent === "green" ? "green" : "blue";
 
     section.innerHTML = `
@@ -1074,7 +1173,7 @@ function calculate(){
 
   const i = I18N[LANG];
   overallBadge.textContent = totalMax > 0 ? i.badgeCalculated : i.badgeNoAnswers;
-  overallBadge.style.color = totalMax > 0 ? "var(--blue)" : "var(--muted)";
+  overallBadge.style.color = totalMax > 0 ? "#fff" : "var(--muted)";
   overallBar.style.width = `${clamp(overall,0,100)}%`;
 
   const weak = weakestSection(sectionResults);
@@ -1180,15 +1279,15 @@ function resetAll(){
     document.getElementById(`pct_${sec.id}`).textContent = "—%";
     const ge = document.getElementById(`grade_${sec.id}`);
     ge.textContent = I18N[LANG].badgeNotCalculated;
-    ge.style.color = "var(--muted)";
+    ge.style.color = "#888";
   });
 
   overallPct.textContent = "—%";
   overallBadge.textContent = I18N[LANG].badgeNotCalculated;
-  overallBadge.style.color = "var(--muted)";
+  overallBadge.style.color = "#888";
   overallBar.style.width = "0%";
   overallGrade.textContent = "—";
-  overallGrade.style.color = "var(--muted)";
+  overallGrade.style.color = "#888";
 
   recBox.classList.remove("show");
   shareBox.classList.remove("show");
@@ -1212,13 +1311,17 @@ function applyLanguage(lang){
   document.body.classList.toggle("ltr", t.dir === "ltr");
 
   // header texts
-  document.getElementById("appName").textContent = t.appName;
+  document.getElementById("appName").innerHTML = (LANG==="en")
+    ? `ERP <span>Assessment</span> Tool`
+    : `أداة التقييم الفني <span>لنظام ERP</span>`;
   document.getElementById("appTagline").textContent = t.appTagline;
 
   // hero texts
   document.getElementById("heroTitle").textContent = t.heroTitle;
   document.getElementById("devTextPrefix").textContent = t.devPrefix;
-  document.getElementById("devTextName").textContent = t.devName;
+  document.getElementById("devTextName").innerHTML = (LANG==="en")
+    ? `Ahmad Majdoba <b>Technical Consulting</b>`
+    : `<b>أحمد المجدوبة</b> للاستشارات التقنية`;
   document.getElementById("heroHint").innerHTML = t.heroHint;
 
   // labels
@@ -1265,7 +1368,6 @@ function applyLanguage(lang){
   // rerender sections in current language while preserving answers
   const savedAnswers = getAnswers();
   renderSections();
-  // restore answers
   SECTIONS.forEach(sec => sec.questions.forEach(q => {
     const el = document.getElementById(`ans_${q.id}`);
     const v = savedAnswers[q.id];
@@ -1274,7 +1376,6 @@ function applyLanguage(lang){
 
   updateProgress();
 
-  // reset calculated labels to "not calculated" if shareBox hidden
   if (!shareBox.classList.contains("show")){
     overallBadge.textContent = t.badgeNotCalculated;
   }
@@ -1333,7 +1434,6 @@ btnSend.addEventListener("click", () => {
   openMail(text);
 });
 
-// update progress on any select change
 document.addEventListener("change", (e) => {
   if (e.target && e.target.matches('select[id^="ans_"]')) updateProgress();
 });
