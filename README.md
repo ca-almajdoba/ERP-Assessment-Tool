@@ -1,79 +1,105 @@
-## ERP ASSESSMENT TOOL
+# ERP ASSESSMENT TOOL
 
-An online ERP assessment tool designed to help businesses evaluate their readiness, requirements, and alignment before selecting or implementing an ERP system.  
-This tool is available for **online use only** through its official web interface.
+A professional, web-based ERP Assessment Tool designed to help organizations evaluate their readiness, requirements, and alignment before selecting or implementing an Enterprise Resource Planning (ERP) system.
 
----
-
-## OFFICIAL ACCESS LINK
-
-Access the tool here:  
-https://ca-almajdoba.github.io/ERP-Assessment-Tool/
+This tool is provided for **online use only** through its official web interface and is intended to support structured, informed ERP decision-making.
 
 ---
 
-## PURPOSE
+## 🔗 Official Access Link
 
-The ERP Assessment Tool enables organizations to assess their current operational maturity, identify gaps, and define ERP requirements in a structured and practical manner.  
-It supports informed decision-making prior to ERP selection or implementation.
+Access the assessment tool here:  
+👉 https://cfo-solutions-est.github.io/ERP-Assessment-Tool/
 
 ---
 
-## KEY FEATURES
+## 🎯 Purpose
 
-- Online assessment questionnaire  
+The ERP Assessment Tool enables organizations to:
+- Assess current operational and process maturity
+- Identify gaps across financial, operational, and administrative areas
+- Define ERP requirements in a structured and practical manner
+- Support informed decision-making prior to ERP selection or implementation
+
+It is designed for SMEs and growing organizations planning ERP initiatives.
+
+---
+
+## ✨ Key Features
+
+- Online ERP assessment questionnaire  
 - Structured evaluation of business and operational needs  
 - ERP readiness and gap identification  
+- Supports ERP selection and implementation planning  
 - Designed for SMEs and growing organizations  
 - No installation required  
-- Continuously updated and improved  
+- Continuously reviewed and improved  
 
 ---
 
-## HOW TO USE
+## 🚀 How to Use
 
 ### Online Usage Only
-1. Open the official link provided above.
+1. Open the official assessment link provided above.
 2. Complete the assessment questions based on your current business operations.
-3. Review the assessment results to support ERP planning and decision-making.
+3. Review the assessment outcomes to support ERP planning and decision-making.
 
 > ⚠️ This tool is available **online only** and does not run locally or inside other systems.
 
 ---
 
-## ACCESS & AVAILABILITY
+## 🔐 Access & Availability
 
 - The ERP Assessment Tool is provided for **online use only**
 - Source code is **not available for download**
 - Copying, modifying, or redistributing the tool is **not permitted**
-- The tool is actively maintained, updated, and enhanced on an ongoing basis
+- The tool is centrally hosted and actively maintained
 
 ---
 
-## UPDATES & MAINTENANCE
+## 🔄 Updates & Maintenance
 
-- The assessment structure and logic are continuously reviewed and improved  
-- Enhancements and updates are applied centrally  
+- The assessment structure and evaluation logic are continuously reviewed  
+- Improvements and enhancements are applied centrally  
 - Users always access the latest version through the official link  
 
 ---
 
-## LICENSE & USAGE
+## 📜 License & Usage
 
-- This tool is provided for **online assessment purposes only**
+- This tool is provided for **ERP assessment and planning purposes only**
 - Unauthorized copying, modification, or redistribution is not allowed
 - For extended assessments, customization, or enterprise-level ERP planning, professional services are available upon request
 
 ---
 
-## CONTACT
+## 🏢 About CFO SOLUTIONS EST.
 
-For ERP consulting, assessment services, or enterprise ERP planning support, feel free to get in touch.
+**CFO SOLUTIONS EST.** is a consulting and digital solutions firm specializing in:
+- ERP advisory and implementation planning
+- Digital finance and business systems
+- ERP readiness assessments and system selection
+- Business process analysis and digital transformation
 
-- **Name:** Ahmad Majdoba  
-- **Role:** Finance Manager & ERP Transformation Consultant  
+We support organizations in making confident, data-driven ERP decisions.
+
+🌐 Website: https://www.cfosolutions.me  
+📧 Email: info@cfosolutions.me  
+
+---
+
+## 👤 Author & Consulting Services
+
+**Ahmad Majdoba**  
+Founder – CFO SOLUTIONS EST.  
+ERP & Digital Transformation Consultant  
+Finance & Business Systems Specialist  
+
 - **Service Delivery:** Remote & On-Site  
-- **Region:** Jordan | Gulf Region  
-- **Email:** info@majdoba.me  
-- **Website:** www.majdoba.me  
-- **WhatsApp:** +962 7 9018 5291  
+- **Region:** Jordan | GCC  
+
+For ERP consulting, assessment services, or enterprise ERP planning support, feel free to contact us.
+
+---
+
+© CFO SOLUTIONS EST. — All rights reserved.
